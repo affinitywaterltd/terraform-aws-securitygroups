@@ -114,7 +114,7 @@ resource "aws_security_group_rule" "HTTP_Open" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
-  security_group_id = "${aws_security_group.open_http_https.id}"
+  security_group_id = "${aws_security_group.open_http_https_sg.id}"
 }
   resource "aws_security_group_rule" "HTTPS_Open" {
   type        = "ingress"
@@ -123,5 +123,5 @@ resource "aws_security_group_rule" "HTTP_Open" {
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
 
-  security_group_id = "${aws_security_group.open_http_https.id}"
+  security_group_id = "${aws_security_group.open_http_https_sg.id}"
   }
