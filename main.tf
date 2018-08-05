@@ -12,7 +12,7 @@ resource "aws_security_group_rule" "anti-virus" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "sg-ce54c4b3"
+  source_security_group_id = "739672810541/sg-ce54c4b3"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -22,7 +22,7 @@ resource "aws_security_group_rule" "darktrace" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "sg-585aca25"
+  source_security_group_id = "739672810541/sg-585aca25"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -32,7 +32,7 @@ resource "aws_security_group_rule" "domains_controllers" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "sg-c4ad3db9"
+  source_security_group_id = "739672810541/sg-c4ad3db9"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -42,7 +42,7 @@ resource "aws_security_group_rule" "monitoring" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "sg-9b50c0e6"
+  source_security_group_id = "739672810541/sg-9b50c0e6"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -52,7 +52,7 @@ resource "aws_security_group_rule" "patching" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "sg-6350c01e"
+  source_security_group_id = "739672810541/sg-6350c01e"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -62,7 +62,7 @@ resource "aws_security_group_rule" "ansible" {
   from_port                = 22
   to_port                  = 22
   protocol                 = "tcp"
-  source_security_group_id = "sg-916cfcec"
+  source_security_group_id = "739672810541/sg-916cfcec"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
