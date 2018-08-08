@@ -68,11 +68,11 @@ resource "aws_security_group_rule" "ansible" {
 }
 
 resource "aws_security_group_rule" "ping" {
-  type                     = "ingress"
-  from_port                = 0
-  to_port                  = 8
-  protocol                 = "icmp"
-  cidr_blocks              = "10.0.0.0/8"
+  type        = "ingress"
+  from_port   = -1
+  to_port     = -1
+  protocol    = "icmp"
+  cidr_blocks = "10.0.0.0/8"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -107,7 +107,6 @@ resource "aws_security_group_rule" "RDP" {
   security_group_id = "${aws_security_group.remote_access_sg.id}"
 }
 
-
 # Public Web Server
 #
 #
@@ -126,7 +125,8 @@ resource "aws_security_group_rule" "HTTP_Open" {
 
   security_group_id = "${aws_security_group.open_http_https_sg.id}"
 }
-  resource "aws_security_group_rule" "HTTPS_Open" {
+
+resource "aws_security_group_rule" "HTTPS_Open" {
   type        = "ingress"
   from_port   = 443
   to_port     = 443
@@ -134,5 +134,4 @@ resource "aws_security_group_rule" "HTTP_Open" {
   cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = "${aws_security_group.open_http_https_sg.id}"
-  }
-
+}
