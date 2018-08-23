@@ -1,4 +1,4 @@
-# Outbound rule!
+# Outbound rule! Currently attached to admin SG only
 
 resource "aws_security_group_rule" "outbound" {
   type                     = "egress"
@@ -14,7 +14,7 @@ resource "aws_security_group_rule" "outbound" {
 #
 #
 resource "aws_security_group" "admin_sg" {
-  name        = "System_Admin_SG"
+  name        = "Core_System_Admin"
   description = "Allow all inbound traffic"
   vpc_id      = "${var.vpc_id}"
 }
@@ -89,12 +89,22 @@ resource "aws_security_group_rule" "ping" {
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
 
+resource "aws_security_group_rule" "dynamic" {
+  type        = "ingress"
+  from_port   = 49152
+  to_port     = 65535
+  protocol    = "tcp"
+  cidr_blocks = ["10.0.0.0/8"]
+
+  security_group_id = "${aws_security_group.admin_sg.id}"
+}
+
 # Remote Access
 #
 #
 
 resource "aws_security_group" "remote_access_sg" {
-  name        = "Remote_Access"
+  name        = "Core_Remote_Access"
   description = "Allows remote access - SSH and RDP - from local network"
   vpc_id      = "${var.vpc_id}"
 }
@@ -122,8 +132,9 @@ resource "aws_security_group_rule" "RDP" {
 # Public Web Server
 #
 #
+
 resource "aws_security_group" "open_http_https_sg" {
-  name        = "SVC_HTTP_HTTPS"
+  name        = "Core_HTTP_HTTPS_All"
   description = "Allows open access from HTTP and HTTPS from anywhere"
   vpc_id      = "${var.vpc_id}"
 }
@@ -144,6 +155,32 @@ resource "aws_security_group_rule" "HTTPS_Open" {
   to_port     = 443
   protocol    = "tcp"
   cidr_blocks = ["0.0.0.0/0"]
+
+  security_group_id = "${aws_security_group.open_http_https_sg.id}"
+}
+
+resource "aws_security_group" "internal_http_https_sg" {
+  name        = "Core_HTTP_HTTPS_Internal"
+  description = "Allows open access from HTTP and HTTPS from anywhere"
+  vpc_id      = "${var.vpc_id}"
+}
+
+resource "aws_security_group_rule" "HTTP_Internal" {
+  type        = "ingress"
+  from_port   = 80
+  to_port     = 80
+  protocol    = "tcp"
+  cidr_blocks = ["10.0.0.0/8"]
+
+  security_group_id = "${aws_security_group.open_http_https_sg.id}"
+}
+
+resource "aws_security_group_rule" "HTTPS_Internal" {
+  type        = "ingress"
+  from_port   = 443
+  to_port     = 443
+  protocol    = "tcp"
+  cidr_blocks = ["10.0.0.0/8"]
 
   security_group_id = "${aws_security_group.open_http_https_sg.id}"
 }
