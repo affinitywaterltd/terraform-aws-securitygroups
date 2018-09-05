@@ -1,11 +1,11 @@
 # Outbound rule! Currently attached to admin SG only
 
 resource "aws_security_group_rule" "outbound" {
-  type                     = "egress"
-  from_port                = -1
-  to_port                  = -1
-  protocol                 = -1
-  cidr_blocks              = ["0.0.0.0/0"]
+  type        = "egress"
+  from_port   = -1
+  to_port     = -1
+  protocol    = -1
+  cidr_blocks = ["0.0.0.0/0"]
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -25,6 +25,7 @@ resource "aws_security_group_rule" "anti-virus" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-ce54c4b3"
+  description              = "Anti-virus"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -35,6 +36,7 @@ resource "aws_security_group_rule" "darktrace" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-585aca25"
+  description              = "Darktrace"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -45,6 +47,7 @@ resource "aws_security_group_rule" "domains_controllers" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-c4ad3db9"
+  description              = "Domain Controllers"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -55,6 +58,7 @@ resource "aws_security_group_rule" "monitoring" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-9b50c0e6"
+  description              = "Monitoring"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -65,6 +69,7 @@ resource "aws_security_group_rule" "patching" {
   to_port                  = 65535
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-6350c01e"
+  description              = "Patching"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -75,6 +80,7 @@ resource "aws_security_group_rule" "ansible" {
   to_port                  = 22
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-916cfcec"
+  description              = "Ansible"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -85,6 +91,7 @@ resource "aws_security_group_rule" "ping" {
   to_port     = -1
   protocol    = "icmp"
   cidr_blocks = ["10.0.0.0/8"]
+  description = "Internal Ping"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -95,6 +102,7 @@ resource "aws_security_group_rule" "dynamic" {
   to_port     = 65535
   protocol    = "tcp"
   cidr_blocks = ["10.0.0.0/8"]
+  description = "Dynamic Port Range"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
@@ -115,6 +123,7 @@ resource "aws_security_group_rule" "SSH" {
   to_port     = 22
   protocol    = "tcp"
   cidr_blocks = ["10.0.0.0/8"]
+  description = "Internal SSH"
 
   security_group_id = "${aws_security_group.remote_access_sg.id}"
 }
@@ -125,6 +134,7 @@ resource "aws_security_group_rule" "RDP" {
   to_port     = 3389
   protocol    = "tcp"
   cidr_blocks = ["10.0.0.0/8"]
+  description = "Internal RDP"
 
   security_group_id = "${aws_security_group.remote_access_sg.id}"
 }
