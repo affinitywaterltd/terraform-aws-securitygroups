@@ -375,12 +375,3 @@ resource "aws_security_group_rule" "389_citrix_delivery" {
   security_group_id = "${aws_security_group.citrix_sg.id}"
 }
 
-resource "aws_security_group_rule" "2598_Internal" {
-  type        = "ingress"
-  from_port   = 2598
-  to_port     = 2598
-  protocol    = "tcp"
-  cidr_blocks = ["10.0.0.0/8"]
-
-  security_group_id = "${aws_security_group.citrix_sg.id}"
-}
