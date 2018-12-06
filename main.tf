@@ -17,6 +17,7 @@ resource "aws_security_group" "admin_sg" {
   name        = "Core_System_Admin"
   description = "Allow all inbound traffic"
   vpc_id      = "${var.vpc_id}"
+  tags        = "${local.base_tags}"
 }
 
 resource "aws_security_group_rule" "anti-virus" {
@@ -115,6 +116,7 @@ resource "aws_security_group" "remote_access_sg" {
   name        = "Core_Remote_Access"
   description = "Allows remote access - SSH and RDP - from local network"
   vpc_id      = "${var.vpc_id}"
+  tags        = "${local.base_tags}"
 }
 
 resource "aws_security_group_rule" "SSH" {
@@ -147,6 +149,7 @@ resource "aws_security_group" "open_http_https_sg" {
   name        = "Core_HTTP_HTTPS_All"
   description = "Allows open access from HTTP and HTTPS from anywhere"
   vpc_id      = "${var.vpc_id}"
+  tags        = "${local.base_tags}"
 }
 
 resource "aws_security_group_rule" "HTTP_Open" {
@@ -173,6 +176,7 @@ resource "aws_security_group" "internal_http_https_sg" {
   name        = "Core_HTTP_HTTPS_Internal"
   description = "Allows open access from HTTP and HTTPS from anywhere"
   vpc_id      = "${var.vpc_id}"
+  tags        = "${local.base_tags}"
 }
 
 resource "aws_security_group_rule" "HTTP_Internal" {
@@ -202,6 +206,7 @@ resource "aws_security_group" "citrix_sg" {
   name        = "Core_Citrix"
   description = "For Citrix created machines"
   vpc_id      = "${var.vpc_id}"
+  tags        = "${local.base_tags}"
 }
 
 resource "aws_security_group_rule" "8082_Internal" {
