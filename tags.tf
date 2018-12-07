@@ -1,6 +1,6 @@
 
 locals {
   base_tags = "${map(
-    "Terraform",          "True",
+    "Terraform",          "true",
   )}"
 }
