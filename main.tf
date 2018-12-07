@@ -199,7 +199,7 @@ resource "aws_security_group" "internal_http_https_sg" {
   tags        = "${local.base_tags}"
 }
 
-resource "aws_security_group_rule" "HTTP_Internal" {
+resource "aws_security_group_rule" "HTTP_Internal_traffic" {
   type        = "ingress"
   from_port   = 80
   to_port     = 80
@@ -209,7 +209,7 @@ resource "aws_security_group_rule" "HTTP_Internal" {
   security_group_id = "${aws_security_group.internal_http_https_sg.id}"
 }
 
-resource "aws_security_group_rule" "HTTPS_Internal" {
+resource "aws_security_group_rule" "HTTPS_Internal_traffic" {
   type        = "ingress"
   from_port   = 443
   to_port     = 443
