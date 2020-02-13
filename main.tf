@@ -86,6 +86,28 @@ resource "aws_security_group_rule" "ansible" {
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
 
+resource "aws_security_group_rule" "solarwinds_agent" {
+  type                     = "ingress"
+  from_port                = 17790
+  to_port                  = 17790
+  protocol                 = "tcp"
+  source_security_group_id = "986618351900/sg-0cc2c86839d14fe1c"
+  description              = "solarwinds_agent"
+
+  security_group_id = "${aws_security_group.admin_sg.id}"
+}
+
+resource "aws_security_group_rule" "solarwinds_wmi" {
+  type                     = "ingress"
+  from_port                = 135
+  to_port                  = 135
+  protocol                 = "tcp"
+  source_security_group_id = "986618351900/sg-0cc2c86839d14fe1c"
+  description              = "solarwinds_wmi"
+
+  security_group_id = "${aws_security_group.admin_sg.id}"
+}
+
 resource "aws_security_group_rule" "ping" {
   type        = "ingress"
   from_port   = -1
@@ -104,17 +126,6 @@ resource "aws_security_group_rule" "dynamic" {
   protocol    = "tcp"
   cidr_blocks = ["10.0.0.0/8"]
   description = "Dynamic Port Range"
-
-  security_group_id = "${aws_security_group.admin_sg.id}"
-}
-
-resource "aws_security_group_rule" "wmi" {
-  type        = "ingress"
-  from_port   = 135
-  to_port     = 135
-  protocol    = "tcp"
-  cidr_blocks = ["10.0.0.0/8"]
-  description = "Internal WMI"
 
   security_group_id = "${aws_security_group.admin_sg.id}"
 }
