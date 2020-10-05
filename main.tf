@@ -53,6 +53,18 @@ resource "aws_security_group_rule" "domains_controllers" {
   security_group_id = aws_security_group.admin_sg.id
 }
 
+
+resource "aws_security_group_rule" "domains_controllers_shared_infra" {
+  type                     = "ingress"
+  from_port                = 0
+  to_port                  = 65535
+  protocol                 = "tcp"
+  source_security_group_id = "986618351900/sg-0a39fde358a87c506"
+  description              = "Shared Infra - Domain Controllers"
+
+  security_group_id = aws_security_group.admin_sg.id
+}
+
 resource "aws_security_group_rule" "monitoring" {
   type                     = "ingress"
   from_port                = 0
@@ -63,6 +75,18 @@ resource "aws_security_group_rule" "monitoring" {
 
   security_group_id = aws_security_group.admin_sg.id
 }
+
+resource "aws_security_group_rule" "zabbix" {
+  type                     = "ingress"
+  from_port                = 10050
+  to_port                  = 10051
+  protocol                 = "tcp"
+  source_security_group_id = "986618351900/sg-0bb782d4b1234a3f6"
+  description              = "Shared Infra - Zabbix"
+
+  security_group_id = aws_security_group.admin_sg.id
+}
+
 
 resource "aws_security_group_rule" "patching" {
   type                     = "ingress"
