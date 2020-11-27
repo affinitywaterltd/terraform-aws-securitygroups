@@ -76,6 +76,17 @@ resource "aws_security_group_rule" "monitoring" {
   security_group_id = aws_security_group.admin_sg.id
 }
 
+resource "aws_security_group_rule" "monitoring_agent" {
+  type                     = "ingress"
+  from_port                = 8885
+  to_port                  = 8885
+  protocol                 = "tcp"
+  source_security_group_id = "986618351900/sg-08391c4926a12a0b8"
+  description              = "Monitoring - Agent"
+
+  security_group_id = aws_security_group.admin_sg.id
+}
+
 resource "aws_security_group_rule" "zabbix" {
   type                     = "ingress"
   from_port                = 10050
