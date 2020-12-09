@@ -79,7 +79,7 @@ resource "aws_security_group_rule" "monitoring" {
 resource "aws_security_group_rule" "monitoring_agent" {
   type                     = "ingress"
   from_port                = 8885
-  to_port                  = 8885
+  to_port                  = 8887
   protocol                 = "tcp"
   source_security_group_id = "986618351900/sg-08391c4926a12a0b8"
   description              = "Monitoring - Agent"
