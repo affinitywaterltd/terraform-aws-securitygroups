@@ -36,7 +36,7 @@ resource "aws_security_group_rule" "darktrace" {
   from_port                = 0
   to_port                  = 65535
   protocol                 = "tcp"
-  source_security_group_id = "739672810541/sg-585aca25"
+  source_security_group_id = "986618351900/sg-0ec17194d23603d47"
   description              = "Darktrace"
 
   security_group_id = aws_security_group.admin_sg.id
