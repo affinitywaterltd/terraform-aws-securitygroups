@@ -42,18 +42,6 @@ resource "aws_security_group_rule" "darktrace" {
   security_group_id = aws_security_group.admin_sg.id
 }
 
-resource "aws_security_group_rule" "domains_controllers" {
-  type                     = "ingress"
-  from_port                = 0
-  to_port                  = 65535
-  protocol                 = "tcp"
-  source_security_group_id = "739672810541/sg-c4ad3db9"
-  description              = "Domain Controllers"
-
-  security_group_id = aws_security_group.admin_sg.id
-}
-
-
 resource "aws_security_group_rule" "domains_controllers_shared_infra" {
   type                     = "ingress"
   from_port                = 0
@@ -106,17 +94,6 @@ resource "aws_security_group_rule" "patching" {
   protocol                 = "tcp"
   source_security_group_id = "739672810541/sg-6350c01e"
   description              = "Patching"
-
-  security_group_id = aws_security_group.admin_sg.id
-}
-
-resource "aws_security_group_rule" "ansible" {
-  type                     = "ingress"
-  from_port                = 22
-  to_port                  = 22
-  protocol                 = "tcp"
-  source_security_group_id = "739672810541/sg-916cfcec"
-  description              = "Ansible"
 
   security_group_id = aws_security_group.admin_sg.id
 }
